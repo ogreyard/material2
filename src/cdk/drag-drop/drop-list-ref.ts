@@ -584,7 +584,7 @@ export class DropListRef<T = any> {
   }
 
   _isCopyDragContainer(): boolean {
-    console.log("copyMode" + this.copyMode);
+    console.log('id ' + this.id + ', copyMode ' + this.copyMode);
     return this.copyMode;
   }
 
@@ -624,7 +624,8 @@ export class DropListRef<T = any> {
       return element === elementFromPoint || element.contains(elementFromPoint);
     });
 
-    return result && result.drop.enterPredicate(item, result.drop) ? result.drop : null;
+    return result && result.drop.enterPredicate(item, result.drop) &&
+    !result.drop._isCopyDragContainer() ? result.drop : null;
   }
 
 }

@@ -697,7 +697,9 @@ export class DragRef<T = any> {
   private _updateActiveDropContainer({x, y}: Point) {
     // Drop container that draggable has been moved into.
     let newContainer = this.dropContainer!._getSiblingContainerFromPosition(this, x, y);
-
+    if ( newContainer && newContainer!._isCopyDragContainer() ) {
+      newContainer = null;
+    }
     // If we couldn't find a new container to move the item into, and the item has left it's
     // initial container, check whether the it's over the initial container. This handles the
     // case where two containers are connected one way and the user tries to undo dragging an
@@ -711,12 +713,16 @@ export class DragRef<T = any> {
     if (newContainer) {
       this._ngZone.run(() => {
         // Notify the old container that the item has left.
-        this.exited.next({item: this, container: this.dropContainer!});
-        this.dropContainer!.exit(this);
-        // Notify the new container that the item has entered.
-        this.entered.next({item: this, container: newContainer!});
-        this.dropContainer = newContainer!;
-        this.dropContainer.enter(this, x, y);
+        // if (! this.dropContainer!._isCopyDragContainer()) {
+          this.exited.next({ item: this, container: this.dropContainer! });
+          this.dropContainer!.exit(this);
+        //  }
+        // if (! newContainer!._isCopyDragContainer() ){
+          // Notify the new container that the item has entered.
+          this.entered.next({ item: this, container: newContainer! });
+          this.dropContainer = newContainer!;
+          this.dropContainer.enter(this, x, y);
+        // }
       });
     }
 
