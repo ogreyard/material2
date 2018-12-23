@@ -570,8 +570,13 @@ export class DragRef<T = any> {
       // We move the element out at the end of the body and we make it hidden, because keeping it in
       // place will throw off the consumer's `:last-child` selectors. We can't remove the element
       // from the DOM completely, because iOS will stop firing all subsequent events in the chain.
-      element.style.display = 'none';
-      this._document.body.appendChild(element.parentNode!.replaceChild(placeholder, element));
+      if (! this.dropContainer._isCopyDragContainer()) {
+        element.style.display = 'none';
+        this._document.body.appendChild(element.parentNode!.replaceChild(placeholder, element));
+      } else if (element.parentNode !== null ) {
+        this._document.body.appendChild((/* @type {?} */ (element.parentNode)).
+        appendChild(placeholder));
+      }
       this._document.body.appendChild(preview);
       this.dropContainer.start();
     }
@@ -698,7 +703,8 @@ export class DragRef<T = any> {
     // case where two containers are connected one way and the user tries to undo dragging an
     // item into a new container.
     if (!newContainer && this.dropContainer !== this._initialContainer &&
-        this._initialContainer._isOverContainer(x, y)) {
+        this._initialContainer._isOverContainer(x, y) &&
+        ! this._initialContainer._isCopyDragContainer()) {
       newContainer = this._initialContainer;
     }
 
@@ -714,7 +720,9 @@ export class DragRef<T = any> {
       });
     }
 
-    this.dropContainer!._sortItem(this, x, y, this._pointerDirectionDelta);
+    if (! this.dropContainer!._isCopyDragContainer() ) {
+      this.dropContainer!._sortItem(this, x, y, this._pointerDirectionDelta);
+    }
     this._preview.style.transform =
         getTransform(x - this._pickupPositionInElement.x, y - this._pickupPositionInElement.y);
   }

@@ -79,7 +79,7 @@
       {"name": "Object.assign", "message": "Use the spread operator instead."}
     ],
     // Avoids inconsistent linebreak styles in source files. Forces developers to use LF linebreaks.
-    "linebreak-style": [true, "LF"],
+    "linebreak-style": [false, "LF"],
     // Namespaces are no allowed, because of Closure compiler.
     "no-namespace": true,
     "jsdoc-format": [true, "check-multiline-start"],
@@ -121,7 +121,7 @@
       "NgModule": "^(?!\\s*$).+"
     }, "src/+(lib|cdk|material-experimental|cdk-experimental)/**/!(*.spec).ts"],
     "require-license-banner": [
-      true,
+      false,
       "src/+(lib|cdk|material-experimental|cdk-experimental|dev-app)/**/!(*.spec).ts"
     ],
     "missing-rollup-globals": [

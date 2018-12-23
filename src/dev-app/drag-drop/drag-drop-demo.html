@@ -4,7 +4,7 @@
     <h2>To do</h2>
     <div
       cdkDropList
-      (cdkDropListDropped)="drop($event)"
+      cdkCopyMode="true"
       [cdkDropListLockAxis]="axisLock"
       [cdkDropListData]="todo">
       <div *ngFor="let item of todo" cdkDrag>

@@ -87,6 +87,9 @@ export class DropListRef<T = any> {
   /** Locks the position of the draggable elements inside the container along the specified axis. */
   lockAxis: 'x' | 'y';
 
+  /** Whether this drop list is in copy mode, i.e. it's only allowing items to be copied off it */
+  copyMode = false;
+
   /**
    * Function that is used to determine whether an item
    * is allowed to be moved into a drop container.
@@ -160,6 +163,8 @@ export class DropListRef<T = any> {
 
   /** Amount of connected siblings that currently have a dragged item. */
   private _activeSiblings = 0;
+
+
 
   constructor(
     public element: ElementRef<HTMLElement>,
@@ -576,6 +581,11 @@ export class DropListRef<T = any> {
    */
   _isOverContainer(x: number, y: number): boolean {
     return isInsideClientRect(this._positionCache.self, x, y);
+  }
+
+  _isCopyDragContainer(): boolean {
+    console.log("copyMode" + this.copyMode);
+    return this.copyMode;
   }
 
   /**

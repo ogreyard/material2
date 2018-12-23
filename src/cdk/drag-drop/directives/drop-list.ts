@@ -105,6 +105,15 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
   }
   private _disabled = false;
 
+  @Input('cdkDropListCopyMode')
+  get copyMode(): boolean {
+    return this._copyMode;
+  }
+  set copyMode(value: boolean) {
+    this._copyMode = coerceBooleanProperty(value);
+  }
+  private _copyMode = false;
+
   /**
    * Function that is used to determine whether an item
    * is allowed to be moved into a drop container.
@@ -268,6 +277,7 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
       }
 
       ref.lockAxis = this.lockAxis;
+      ref.copyMode = this._copyMode;
       ref
         .connectedTo(siblings.filter(drop => drop && drop !== this).map(list => list._dropListRef))
         .withOrientation(this.orientation)
