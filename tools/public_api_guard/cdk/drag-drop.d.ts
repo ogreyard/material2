@@ -122,6 +122,7 @@ export declare class CdkDropList<T = any> implements CdkDropListContainer, OnDes
     exited: EventEmitter<CdkDragExit<T>>;
     id: string;
     lockAxis: 'x' | 'y';
+    copyMode: boolean;
     orientation: 'horizontal' | 'vertical';
     sorted: EventEmitter<CdkDragSortEvent<T>>;
     constructor(element: ElementRef<HTMLElement>, dragDropRegistry: DragDropRegistry<DragRef, DropListRef>, _changeDetectorRef: ChangeDetectorRef, dir?: Directionality, _group?: CdkDropListGroup<CdkDropList<any>> | undefined, _document?: any);
@@ -146,6 +147,7 @@ export interface CdkDropListContainer<T = any> {
     element: ElementRef<HTMLElement>;
     id: string;
     lockAxis: 'x' | 'y';
+    copyMode: boolean;
     orientation: 'horizontal' | 'vertical';
     _getSiblingContainerFromPosition(item: CdkDrag, x: number, y: number): CdkDropListContainer | null;
     _isOverContainer(x: number, y: number): boolean;
