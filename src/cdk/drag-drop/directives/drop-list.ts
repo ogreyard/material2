@@ -107,10 +107,13 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
 
   @Input('cdkDropListCopyMode')
   get copyMode(): boolean {
+    console.log("get CopyMode() directive: " + this._copyMode);
     return this._copyMode;
   }
   set copyMode(value: boolean) {
+    console.log("set copyMode to " + value);
     this._copyMode = coerceBooleanProperty(value);
+    this._dropListRef.copyMode = value;
   }
   private _copyMode = false;
 
@@ -156,6 +159,9 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
     const ref = this._dropListRef = new DropListRef(element, dragDropRegistry,
         _document || document, dir);
     ref.data = this;
+    console.log("constructor " + this.id + ", copyMode " + this._copyMode);
+    ref.copyMode = this._copyMode;
+
     ref.enterPredicate = (drag: DragRef<CdkDrag>, drop: DropListRef<CdkDropList>) => {
       return this.enterPredicate(drag.data, drop.data);
     };
@@ -262,6 +268,9 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
 
   /** Syncs the inputs of the CdkDropList with the options of the underlying DropListRef. */
   private _syncInputs(ref: DropListRef<CdkDropList>) {
+
+    console.log("drop-list directive: syncInputs");
+
     ref.beforeStarted.subscribe(() => {
       const siblings = coerceArray(this.connectedTo).map(drop => {
         return typeof drop === 'string' ?
@@ -275,9 +284,9 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
           }
         });
       }
-
-      ref.lockAxis = this.lockAxis;
       ref.copyMode = this._copyMode;
+      ref.lockAxis = this.lockAxis;
+      
       ref
         .connectedTo(siblings.filter(drop => drop && drop !== this).map(list => list._dropListRef))
         .withOrientation(this.orientation)
