@@ -88,7 +88,7 @@ export class DropListRef<T = any> {
   lockAxis: 'x' | 'y';
 
   /** Whether this drop list is in copy mode, i.e. it's only allowing items to be copied off it */
-  copyMode = false;
+  copyMode: boolean = false;
 
   /**
    * Function that is used to determine whether an item

@@ -18,7 +18,7 @@
     <h2>Done</h2>
     <div
       cdkDropList
-      
+      (cdkDropListDropped)="drop($event)"
       [cdkDropListLockAxis]="axisLock"
       [cdkDropListData]="done">
       <div *ngFor="let item of done" cdkDrag>
