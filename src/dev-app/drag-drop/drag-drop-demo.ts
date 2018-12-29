@@ -54,7 +54,6 @@ export class DragAndDropDemo {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    
     if (event.previousContainer === event.container && !event.previousContainer.copyMode) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -64,8 +63,7 @@ export class DragAndDropDemo {
           event.container.data,
           event.previousIndex,
           event.currentIndex);
-      }
-      else {
+      } else {
         copyArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,

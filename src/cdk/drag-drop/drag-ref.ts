@@ -705,11 +705,11 @@ export class DragRef<T = any> {
     // initial container, check whether the it's over the initial container. This handles the
     // case where two containers are connected one way and the user tries to undo dragging an
     // item into a new container.
-    if (!newContainer && this.dropContainer !== this._initialContainer &&
-        this._initialContainer._isOverContainer(x, y) &&
-        ! this._initialContainer._isCopyDragContainer()) {
-      newContainer = this._initialContainer;
-    }
+    // if (!newContainer && this.dropContainer !== this._initialContainer &&
+    //     this._initialContainer._isOverContainer(x, y) &&
+    //     ! this._initialContainer._isCopyDragContainer()) {
+    //   newContainer = this._initialContainer;
+    // }
 
     if (newContainer) {
       this._ngZone.run(() => {
