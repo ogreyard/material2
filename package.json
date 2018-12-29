@@ -43,6 +43,7 @@
     "systemjs": "0.19.43",
     "tsickle": "^0.34.0",
     "tslib": "^1.9.3",
+    "yarn": "^1.12.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -134,7 +135,7 @@
     "sorcery": "^0.10.0",
     "source-map-support": "^0.5.9",
     "stylelint": "^9.9.0",
-    "ts-node": "^3.0.4",
+    "ts-node": "^3.3.0",
     "tsconfig-paths": "^2.3.0",
     "tslint": "^5.11.0",
     "tsutils": "^3.0.0",

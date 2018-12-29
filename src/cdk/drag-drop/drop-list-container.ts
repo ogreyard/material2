@@ -33,6 +33,8 @@ export interface CdkDropListContainer<T = any> {
   /** Locks the position of the draggable elements inside the container along the specified axis. */
   lockAxis: 'x' | 'y';
 
+  copyMode: boolean;
+
   /** Whether starting a dragging sequence from this container is disabled. */
   disabled: boolean;
 

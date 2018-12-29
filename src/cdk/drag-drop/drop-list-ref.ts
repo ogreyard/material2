@@ -88,7 +88,7 @@ export class DropListRef<T = any> {
   lockAxis: 'x' | 'y';
 
   /** Whether this drop list is in copy mode, i.e. it's only allowing items to be copied off it */
-  copyMode = false;
+  copyMode: boolean = false;
 
   /**
    * Function that is used to determine whether an item
@@ -215,6 +215,9 @@ export class DropListRef<T = any> {
     const currentIndex = this._activeDraggables.indexOf(item);
     const newPositionReference = this._activeDraggables[newIndex];
     const placeholder = item.getPlaceholderElement();
+
+    // make placeholder visible once entered into other container
+    placeholder.style.display = '';
 
     // Since the item may be in the `activeDraggables` already (e.g. if the user dragged it
     // into another container and back again), we have to ensure that it isn't duplicated.
