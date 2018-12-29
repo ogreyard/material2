@@ -573,9 +573,10 @@ export class DragRef<T = any> {
       if (! this.dropContainer._isCopyDragContainer()) {
         element.style.display = 'none';
         this._document.body.appendChild(element.parentNode!.replaceChild(placeholder, element));
-      } else if (element.parentNode !== null ) {
-        this._document.body.appendChild((/* @type {?} */ (element.parentNode)).
+      } else {
+        this._document.body.appendChild((/* @type {?} */ (element.parentNode!)).
         appendChild(placeholder));
+        placeholder.style.display = 'none';
       }
       this._document.body.appendChild(preview);
       this.dropContainer.start();

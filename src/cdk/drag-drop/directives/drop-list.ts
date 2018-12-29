@@ -110,6 +110,7 @@ export class CdkDropList<T = any> implements CdkDropListContainer, OnDestroy {
     return this._copyMode;
   }
   set copyMode(value: boolean) {
+    this._dropListRef.copyMode = coerceBooleanProperty(value);
     this._copyMode = coerceBooleanProperty(value);
   }
   private _copyMode = false;
