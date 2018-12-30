@@ -634,7 +634,7 @@ export class DropListRef<T = any> {
     // at the pointer position and to find whether it's one of the intersecting drop containers.
     const result = results.find(sibling => {
       const element = sibling.drop.element.nativeElement;
-      return element === elementFromPoint || element.contains(elementFromPoint);
+      return element === elementFromPoint || element.contains(elementFromPoint) || elementFromPoint.contains(element)
     });
 
     return result && result.drop.enterPredicate(item, result.drop) &&
