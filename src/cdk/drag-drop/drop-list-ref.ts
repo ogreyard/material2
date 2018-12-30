@@ -232,8 +232,13 @@ export class DropListRef<T = any> {
       element.parentElement!.insertBefore(placeholder, element);
       this._activeDraggables.splice(newIndex, 0, item);
     } else {
-      this.element.nativeElement.appendChild(placeholder);
+      var newInd = currentIndex-1 >= 0 ? currentIndex-1 : currentIndex;
+      var element = this._activeDraggables[newInd].getRootElement(); /** @type {?} */
+      ((element.parentElement!)).insertBefore(placeholder, element);
+      
       this._activeDraggables.push(item);
+      // this.element.nativeElement.appendChild(placeholder);
+      // this._activeDraggables.push(item);
     }
 
     // The transform needs to be cleared so it doesn't throw off the measurements.
