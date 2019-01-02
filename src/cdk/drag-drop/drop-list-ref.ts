@@ -232,15 +232,15 @@ export class DropListRef<T = any> {
       element.parentElement!.insertBefore(placeholder, element);
       this._activeDraggables.splice(newIndex, 0, item);
     } else {
-      var newInd = currentIndex - 1 >= 0 ? currentIndex - 1 : currentIndex;
       if(this._activeDraggables.length === 0){
           this.element.nativeElement.appendChild(placeholder);
           this._activeDraggables.push(item);
       }
-      else{
-          var element = this._activeDraggables[newInd].getRootElement();
-          (element.parentElement!).insertBefore(placeholder, element);
+      else {
+        var element = this._activeDraggables[currentIndex > -1 && currentIndex < this._activeDraggables.length ? currentIndex : this._activeDraggables.length -1 ].getRootElement();
+          (element.parentElement!).insertBefore(placeholder, element.nextSibling);
           this._activeDraggables.push(item);
+          
       }
       // this.element.nativeElement.appendChild(placeholder);
       // this._activeDraggables.push(item);
